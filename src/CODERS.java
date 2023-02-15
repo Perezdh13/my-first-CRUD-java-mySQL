@@ -38,6 +38,10 @@ public class CODERS extends JFrame {
         f.pack();
     }
 
+
+
+
+
     public void conectar() {
         try {
             con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/factoriaf5","root","");
