@@ -28,6 +28,16 @@ public class CODERS extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    lista();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
                     añadir();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -40,7 +50,7 @@ public class CODERS extends JFrame {
         conectar();
         list.setModel(mod);
         st = con.createStatement();
-        r = st.executeQuery("SELECT id,name,surname FROM coders");
+        r = st.executeQuery("SELECT idcoders,name,surname FROM coders");
         mod.removeAllElements();
         while (r.next()) {
             mod.addElement(r.getString(1) + "  " + r.getString(2) + "  "+r.getString(3));
