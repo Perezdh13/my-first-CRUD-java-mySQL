@@ -30,7 +30,7 @@ public class CODERS extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                   readCoders();
+                    readCoders();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -103,13 +103,13 @@ public class CODERS extends JFrame {
 
             public void createCoder() throws SQLException {
         conect();
-        ps = con.prepareStatement("INSERT INTO coders VALUES (?,?,?,?,?,?)");
-        ps.setInt(1, Integer.parseInt(idText.getText()));
-        ps.setString(2, nameText.getText());
-        ps.setString(3, surnameText.getText());
-        ps.setString(4, emailText.getText());
-        ps.setString(5, githubText.getText());
-        ps.setString(6, linkedinText.getText());
+        ps = con.prepareStatement("INSERT INTO coders (name,surname, email, github, linkedin) VALUES (?,?,?,?,?)");
+
+        ps.setString(1, nameText.getText());
+        ps.setString(2, surnameText.getText());
+        ps.setString(3, emailText.getText());
+        ps.setString(4, githubText.getText());
+        ps.setString(5, linkedinText.getText());
         if (ps.executeUpdate() > 0) {
             list.setModel(mod);
             mod.removeAllElements();
@@ -182,12 +182,13 @@ public class CODERS extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         CODERS f = new CODERS();
         f.setContentPane(new CODERS().PANEL_CODERS);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
         f.pack();
+
     }
 
     public void conect() {
