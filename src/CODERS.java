@@ -1,6 +1,7 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.event.*;
 import java.sql.*;
 
 
@@ -20,7 +21,8 @@ public class CODERS extends JFrame {
     private JButton getButton;
     private JList list;
     private JTextField linkedinText;
-
+    private JButton deleteButton;
+    private JButton updateButton;
 
 
     public CODERS() {
@@ -28,7 +30,7 @@ public class CODERS extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    lista();
+                   readCoders();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -38,27 +40,69 @@ public class CODERS extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    añadir();
+                    createCoder();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
             }
         });
-    }
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateCoder();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    deleteCoder();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
-    public void lista() throws SQLException {
-        conectar();
-        list.setModel(mod);
-        st = con.createStatement();
-        r = st.executeQuery("SELECT idcoders,name,surname FROM coders");
-        mod.removeAllElements();
-        while (r.next()) {
-            mod.addElement(r.getString(1) + "  " + r.getString(2) + "  "+r.getString(3));
-        }
-    }
 
-    public void añadir() throws SQLException {
-        conectar();
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (list.getSelectedIndex() != -1) {
+                    String selectedText = (String) list.getSelectedValue();
+                    String[] splitText = selectedText.split("\\s+");
+                    int id = Integer.parseInt(splitText[0]);
+                    copyCoders(id);
+                }
+            }
+        });
+    }
+    public void copyCoders (int id) {
+                try {
+                    conect();
+                    ps = con.prepareStatement("SELECT * FROM coders WHERE idcoders=?");
+                    ps.setInt(1, id);
+                    r = ps.executeQuery();
+
+                    if (r.next()) {
+                        idText.setText(String.valueOf(r.getInt("idcoders")));
+                        nameText.setText(r.getString("name"));
+                        surnameText.setText(r.getString("surname"));
+                        emailText.setText(r.getString("email"));
+                        githubText.setText(r.getString("github"));
+                        linkedinText.setText(r.getString("linkedin"));
+                    }
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            public void createCoder() throws SQLException {
+        conect();
         ps = con.prepareStatement("INSERT INTO coders VALUES (?,?,?,?,?,?)");
         ps.setInt(1, Integer.parseInt(idText.getText()));
         ps.setString(2, nameText.getText());
@@ -69,7 +113,42 @@ public class CODERS extends JFrame {
         if (ps.executeUpdate() > 0) {
             list.setModel(mod);
             mod.removeAllElements();
-            mod.addElement("coder añadido!!!");
+
+
+            idText.setText("");
+            nameText.setText("");
+            surnameText.setText("");
+            emailText.setText("");
+            githubText.setText("");
+            linkedinText.setText("");
+            JOptionPane.showMessageDialog(null, "Coder añadido");
+        }
+    }
+    public void readCoders() throws SQLException {
+        conect();
+        list.setModel(mod);
+        st = con.createStatement();
+        r = st.executeQuery("SELECT idcoders,name,surname FROM coders");
+        mod.removeAllElements();
+        while (r.next()) {
+            mod.addElement(r.getString(1) + "  " + r.getString(2) + "  "+r.getString(3));
+        }
+    }
+
+    public void updateCoder() throws SQLException {
+        conect();
+        ps = con.prepareStatement("UPDATE coders SET name=?, surname=?, email=?, github=?, linkedin=? WHERE idcoders=?");
+        ps.setString(1, nameText.getText());
+        ps.setString(2, surnameText.getText());
+        ps.setString(3, emailText.getText());
+        ps.setString(4, githubText.getText());
+        ps.setString(5, linkedinText.getText());
+        ps.setInt(6, Integer.parseInt(idText.getText()));
+
+        if (ps.executeUpdate() > 0) {
+            list.setModel(mod);
+            mod.removeAllElements();
+
 
             idText.setText("");
             nameText.setText("");
@@ -78,6 +157,28 @@ public class CODERS extends JFrame {
             githubText.setText("");
             linkedinText.setText("");
 
+            JOptionPane.showMessageDialog(null, "Coder actualizado");
+        }
+    }
+
+    public void deleteCoder() throws SQLException {
+        conect();
+        ps = con.prepareStatement("DELETE FROM coders WHERE idcoders=?");
+        ps.setInt(1, Integer.parseInt(idText.getText()));
+
+        if (ps.executeUpdate() > 0) {
+            list.setModel(mod);
+            mod.removeAllElements();
+
+
+            idText.setText("");
+            nameText.setText("");
+            surnameText.setText("");
+            emailText.setText("");
+            githubText.setText("");
+            linkedinText.setText("");
+
+            JOptionPane.showMessageDialog(null, "Coder eliminado");
         }
     }
 
@@ -89,7 +190,7 @@ public class CODERS extends JFrame {
         f.pack();
     }
 
-    public void conectar() {
+    public void conect() {
         try {
             con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/factoriaf5", "root", "2202");
             System.out.println("conexion realizada");
