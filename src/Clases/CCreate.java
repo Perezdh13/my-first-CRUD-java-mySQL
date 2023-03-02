@@ -13,15 +13,9 @@ public class CCreate extends Coders{
         ps.setString(3, emailText.getText());
         ps.setString(4, githubText.getText());
         ps.setString(5, linkedinText.getText());
-        int rowsAffected = ps.executeUpdate();
-
-        if (rowsAffected > 0) {
-
-            list.setModel(mod);
-            mod.removeAllElements();
 
 
-            idText.setText("");
+        if (ps.executeUpdate()> 0) {
             nameText.setText("");
             surnameText.setText("");
             emailText.setText("");

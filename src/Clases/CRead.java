@@ -1,8 +1,6 @@
 package Clases;
-
 import javax.swing.*;
 import java.sql.SQLException;
-
 public class CRead extends Coders {
     public void readCoders(JList list) throws SQLException {
         conect();
