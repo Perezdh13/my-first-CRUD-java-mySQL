@@ -7,14 +7,14 @@ import java.awt.event.*;
 import java.sql.*;
 
 
-public class Coders extends  JFrame{
+public class Coders extends JFrame{
     Connection con;
     PreparedStatement ps;
     Statement st;
     ResultSet r;
      
     DefaultListModel mod = new DefaultListModel<>();
-     JPanel PANEL_CODERS;
+    public JPanel PANEL_CODERS;
     public JTextField nameText;
     public JTextField githubText;
     public JTextField emailText;
