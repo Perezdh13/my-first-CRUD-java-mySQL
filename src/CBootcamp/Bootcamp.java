@@ -33,10 +33,9 @@ public Bootcamp() {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                CBCreate create = new CBCreate();
+                CBCrud create = new CBCrud();
                 create.createBootcamp(nameBootcamp,directorBootcamp,provinceBootcamp, coders, trainers);
-                CBRead read = new CBRead();
-                read.readBootcamp(list1);
+                create.readBootcamp(list1);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -46,7 +45,7 @@ public Bootcamp() {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                CBRead read = new CBRead();
+                CBCrud read = new CBCrud();
                 read.readBootcamp(list1);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -57,10 +56,9 @@ public Bootcamp() {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                CBUpdate update = new CBUpdate();
+                CBCrud update = new CBCrud();
                 update.updateBootcamp(idBootcamp,nameBootcamp,directorBootcamp,provinceBootcamp, coders, trainers);
-                CBRead read = new CBRead();
-                read.readBootcamp(list1);
+                update.readBootcamp(list1);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -70,10 +68,9 @@ public Bootcamp() {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                CBDelete delete = new CBDelete();
+                CBCrud delete = new CBCrud();
                 delete.deleteBootcamp(idBootcamp,nameBootcamp,directorBootcamp,provinceBootcamp, coders, trainers);
-                CBRead read = new CBRead();
-                read.readBootcamp(list1);
+                delete.readBootcamp(list1);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
