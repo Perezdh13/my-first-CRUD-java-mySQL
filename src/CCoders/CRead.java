@@ -6,7 +6,7 @@ public class CRead extends Coders {
         conect();
         list.setModel(mod);
         st = con.createStatement();
-        r = st.executeQuery("SELECT idcoders,name,surname FROM coders");
+        r = st.executeQuery("SELECT id,name,surname FROM coders");
         mod.removeAllElements();
         while (r.next()) {
             mod.addElement(r.getString(1) + "  " + r.getString(2) + "  "+r.getString(3));

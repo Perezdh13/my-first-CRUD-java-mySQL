@@ -96,40 +96,6 @@
           <text value="province"/>
         </properties>
       </component>
-      <component id="9bfe5" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="coders"/>
-        </properties>
-      </component>
-      <component id="76298" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="28" height="22"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="trainers"/>
-        </properties>
-      </component>
-      <component id="6a445" class="javax.swing.JTextField" binding="coders">
-        <constraints>
-          <grid row="7" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="534d4" class="javax.swing.JTextField" binding="trainers">
-        <constraints>
-          <grid row="8" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
       <component id="ad10c" class="javax.swing.JLabel">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -183,6 +149,24 @@
         </constraints>
         <properties>
           <text value="Consultar"/>
+        </properties>
+      </component>
+      <component id="534d4" class="javax.swing.JTextField" binding="trainers">
+        <constraints>
+          <grid row="7" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="76298" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="28" height="22"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="trainers"/>
         </properties>
       </component>
     </children>

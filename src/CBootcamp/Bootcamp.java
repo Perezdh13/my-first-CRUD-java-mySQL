@@ -22,7 +22,7 @@ public class Bootcamp extends Coders {
     public JTextField nameBootcamp;
     public JTextField directorBootcamp;
     public JTextField provinceBootcamp;
-    public JTextField coders;
+
     public JTextField trainers;
     public JLabel Bootcamp_panel;
     public JButton upDateButton;
@@ -34,7 +34,7 @@ public Bootcamp() {
         public void actionPerformed(ActionEvent e) {
             try {
                 CBCrud create = new CBCrud();
-                create.createBootcamp(nameBootcamp,directorBootcamp,provinceBootcamp, coders, trainers);
+                create.createBootcamp(nameBootcamp,directorBootcamp,provinceBootcamp,trainers);
                 create.readBootcamp(list1);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -57,7 +57,7 @@ public Bootcamp() {
         public void actionPerformed(ActionEvent e) {
             try {
                 CBCrud update = new CBCrud();
-                update.updateBootcamp(idBootcamp,nameBootcamp,directorBootcamp,provinceBootcamp, coders, trainers);
+                update.updateBootcamp(idBootcamp,nameBootcamp,directorBootcamp,provinceBootcamp,trainers);
                 update.readBootcamp(list1);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -69,7 +69,7 @@ public Bootcamp() {
         public void actionPerformed(ActionEvent e) {
             try {
                 CBCrud delete = new CBCrud();
-                delete.deleteBootcamp(idBootcamp,nameBootcamp,directorBootcamp,provinceBootcamp, coders, trainers);
+                delete.deleteBootcamp(idBootcamp,nameBootcamp,directorBootcamp,provinceBootcamp,trainers);
                 delete.readBootcamp(list1);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -85,7 +85,7 @@ public Bootcamp() {
                 String[] splitText = selectedText.split("\\s+");
                 int id = Integer.parseInt(splitText[0]);
                 CBCopy copy = new CBCopy();
-                copy.copyBootcamps(id, idBootcamp, nameBootcamp,directorBootcamp,provinceBootcamp,trainers,coders);
+                copy.copyBootcamps(id, idBootcamp, nameBootcamp,directorBootcamp,provinceBootcamp,trainers);
             }
         }
     });
